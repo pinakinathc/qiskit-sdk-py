@@ -69,7 +69,8 @@ class CircuitBackend(UnrollerBackend):
         name = name of the register
         sz = size of the register
         """
-        assert size >= 0, "invalid qreg size"
+	if size < 0:
+		raise BackendError("invalid qreg size")
         q_register = QuantumRegister(name, size)
         self.circuit.add(q_register)
 
